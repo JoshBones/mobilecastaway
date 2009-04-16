@@ -1,4 +1,4 @@
-= Introduction =
+#summary Capture and train animals as pets and livestock.
 
 = Training =
 
