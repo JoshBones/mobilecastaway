@@ -13,7 +13,10 @@ A complete record of all ideas we've pulled together so far so mobile castaway
 
   * [Weather]
 
-  * [Isometric] (placeholder [Graphics]): move -grid to grid
+  * [Isometric] (placeholder [Graphics])
+    * Move grid-to-grid
+    * Only keep immediate area in memory. Outside that area is on persistent memory.
+      * Break it up into sectors and only have the adjacent ones in RAM.
 
   * You can [swim] (splish splosh)
 
