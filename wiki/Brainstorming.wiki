@@ -1,13 +1,33 @@
 #summary ideas brainstorm
 
-= Introduction =
+= Summary =
 
 A complete record of all ideas we've pulled together so far so mobile castaway
 
 
 = Details =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+* Desert Island game - on your own
+
+* Survival with a lime twist of story
+
+* weather
+
+* Isometric (placeholder graphics): move -grid to grid
+
+* You can swim (splish splosh)
+
+* Funny - johnny castaway style
+
+* AI animals / tribes
+
+* Food:
+||Gather||berries/fruit||
+||hunting||animals||
+||fishing||fish/lobster/crayfish etc.||
+||farming||fruit trees/wheat etc||
+||bartering||with tribes||
+
+* Don't go insane (in the membrane)
+**hallucinogenic berries
+**boredom etc
