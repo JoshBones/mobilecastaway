@@ -27,6 +27,7 @@ A complete record of all ideas we've pulled together so far so mobile castaway
 ||fishing||fish/lobster/crayfish etc.||
 ||farming||fruit trees/wheat etc||
 ||bartering||with tribes||
+||[domestication]||capture/tame wild animals||
 
   * Don't go insane (in the membrane)
         hallucinogenic berries
