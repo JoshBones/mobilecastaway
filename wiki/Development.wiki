@@ -1,20 +1,14 @@
 #summary Outline the development plan and where to progress next.
 
-= Introduction =
-
-
-
-= Details =
-
-== Andreas ==
+= Andreas =
 
   * Tile Engine
 
-== Josh ==
+= Josh =
 
   * Menus
   * Draw tiles
 
-== To Do ==
+= To Do =
 
   * General base GameCanvas class
