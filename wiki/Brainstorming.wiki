@@ -11,36 +11,36 @@ A complete record of all ideas we've pulled together so far so mobile castaway
 
   * Survival with a lime twist of story
 
-  * weather
+  * [Weather]
 
-  * Isometric (placeholder graphics): move -grid to grid
+  * [Isometric] (placeholder [Graphics]): move -grid to grid
 
-  * You can swim (splish splosh)
+  * You can [swim] (splish splosh)
 
-  * Funny - johnny castaway style
+  * [Funny] - johnny castaway style
 
-  * AI animals / tribes
+  * [AI] [animals] / [tribe]s
 
   * [Food]:
-||Gather||berries/fruit||
-||hunting||animals||
-||fishing||fish/lobster/crayfish etc.||
-||farming||fruit trees/wheat etc||
-||bartering||with tribes||
+||[Gather]||berries/fruit||
+||[Hunting]||[animals]||
+||[Fishing]||fish/lobster/crayfish etc.||
+||[Farming]||fruit trees/wheat etc||
+||[Bartering]||with tribes||
 ||[Domestication]||capture/tame wild animals||
 
-  * Don't go insane (in the membrane)
+  * Don't go [insane] (in the membrane)
         hallucinogenic berries
-        boredom etc
+        [boredom] etc
 
-  * Moral element: injured tribesman, can help or take bow etc
+  * [Moral] element: injured tribesman, can help or take bow etc
 
-  * Randomness island,location,non-random scripted events,randomise berry etc. graphics
+  * [Randomness] [island],location,non-random scripted events,randomise berry etc. graphics
 
-  * Premade houses/shelters - maybe build your own?
+  * Premade [house]s/[shelter]s - maybe build your own?
 
   * no elves!!
 
   * *GOAL:* 
 ||short term||don't die||
-||long term||rescue;escape(boat?);live with tribe||
+||long term||[rescue];[escape](boat?);[live with tribe]||
