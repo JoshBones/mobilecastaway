@@ -1,4 +1,4 @@
-#summary Overview of food system
+#summary Foods and methods of acquiring it.
 
 = Gathering =
 
