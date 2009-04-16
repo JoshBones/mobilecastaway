@@ -21,7 +21,7 @@ A complete record of all ideas we've pulled together so far so mobile castaway
 
   * AI animals / tribes
 
-  * Food:
+  * [Food]:
 ||Gather||berries/fruit||
 ||hunting||animals||
 ||fishing||fish/lobster/crayfish etc.||
