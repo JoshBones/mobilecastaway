@@ -4,4 +4,10 @@
 
 = Events =
 
+  # MIDlet defines a global EventListener class.
+  # A canvas that extends CastawayGameCanvas requires the EventListener to be passed to it's constructor
+  # When an event should occur, the canvas calls the doEvent() method with a new Event object, the event type is specified by selecting on the the final static strings from the Event class
+  # The EventListener  asynchronously registers the event and the Event's referrer and takes the appropriate action in a new thread.
+  # If the event would cause the end of the canvas, the canvas must dispose of its objects, then throw a further EVENT_CONTROL_END event. This doesn't interfere with program flow, as flow continues on a different thread. the canvas is disposed of in the background.
+
 = Canvas' =
