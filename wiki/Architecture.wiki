@@ -1,0 +1,7 @@
+#summary Description of program architecture.
+
+= MIDlet responsibilities =
+
+= Events =
+
+= Canvas' =
