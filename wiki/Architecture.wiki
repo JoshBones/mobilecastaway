@@ -13,3 +13,7 @@
   # If the event would cause the end of the canvas, the canvas must dispose of its objects, then throw a further EVENT_CONTROL_END event. This doesn't interfere with program flow, as flow continues on a different thread. the canvas is disposed of in the background.
 
 = Canvas' =
+
+  * Contain their own game loop thats runs on a new thread
+  * Are responsible for disposing of their own objects when instructed to
+  * Handle all internal events themselves, pass external events to EventListener
