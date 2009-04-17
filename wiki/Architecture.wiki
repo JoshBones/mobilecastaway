@@ -1,6 +1,8 @@
 #summary Description of program architecture.
 
-= MIDlet responsibilities =
+= MIDlet =
+
+  * Maintains a CanvasMap object, which is it's only link to each canvas. this allows for easy disposal of canvases that have been finished.
 
 = Events =
 
