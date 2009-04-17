@@ -42,8 +42,9 @@ public class Event {
     private final String[] EVENT_WIN_TYPES = {EVENT_WIN_ESCAPE,EVENT_WIN_RESCUE,EVENT_WIN_LIVE_WITH_TRIBE};
 
     private String type;
+    private CastawayGameCanvas referrer;
 
-    public Event(String type)throws InvalidEventTypeException {
+    public Event(String type,CastawayGameCanvas referrer)throws InvalidEventTypeException {
         boolean valid = false;
 
         for (int i=0;i<EVENT_GAME_TYPES.length;i++){
@@ -85,9 +86,14 @@ public class Event {
             throw new InvalidEventTypeException ("Invalid event type");
         
         this.type = type;
+        this.referrer = referrer;
     }
 
     public String getEventType(){
         return type;
+    }
+
+    public CastawayGameCanvas getReferrer() {
+        return referrer;
     }
 }
