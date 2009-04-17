@@ -9,6 +9,12 @@ public class EventListener implements Runnable {
 
     Event currentEvent;
     Thread eventHandlerThread;
+    CastawayMIDlet game;
+
+    public EventListener(CastawayMIDlet game) {
+        this.game = game;
+        eventHandlerThread = new Thread(this);
+    }
 
     public void doEvent(Event e){
         this.currentEvent = e;
@@ -25,10 +31,10 @@ public class EventListener implements Runnable {
         String type=currentEvent.getEventType();
 
         if (type.indexOf(Event.EVENT_GAME_KEYWORD) == 0){
-            //call GAME event handler
+            handleGameEvent();
         }
         else if (type.indexOf(Event.EVENT_CONTROL_KEYWORD) == 0){
-            //call CONTROL event handler
+            handleGameEvent();
         }
         else if (type.indexOf(Event.EVENT_GO_AREA_KEYWORD) == 0){
             //call GO_AREA event handler
@@ -51,7 +57,7 @@ public class EventListener implements Runnable {
             
         }
         else if (type.equals(Event.EVENT_GAME_EXIT)){
-            
+            game.destroyApp(true);
         }
     }
 
