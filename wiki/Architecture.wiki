@@ -1,5 +1,7 @@
 #summary Description of program architecture.
 
+_NB._ This is currently all just  me spitballing, trying out a particular way of doing things, if you can think of a better way let me know!
+
 = MIDlet =
 
   * Maintains a CanvasMap object, which is it's only link to each canvas. this allows for easy disposal of canvases that have been finished.
