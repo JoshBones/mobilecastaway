@@ -14,3 +14,5 @@
 
   * DONE - General base GameCanvas class
   * Isometric Tile Engine
+  * Sound / Music
+  * Image Manager class
