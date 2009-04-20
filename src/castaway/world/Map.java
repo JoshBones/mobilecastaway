@@ -10,19 +10,20 @@ import castaway.world.tile.Tile;
 public class Map {
 
     /**
-     * The region of the map which currently exists in memory.
+     * The map divided into sectors.
      */
     private SectorManager sectors;
     
     /**
-     * Gets a tile at the specified coordinates.
+     * Get an array of the tiles at the current coordinate, from the bottom
+     * position upwards.
      * 
      * @param x
      * @param y
      * @return tile
      * @throws IndexOutOfBoundsException
      */
-    public Tile getTile(int x, int y) throws IndexOutOfBoundsException {
+    public Tile[] getTiles(int x, int y) throws IndexOutOfBoundsException {
         
         // Check boundaries
         if (x < sectors.getBoundaryLeft() ||
@@ -38,6 +39,6 @@ public class Map {
                     "x: " + x + ". y: " + y + ".");
             }
         
-        return null;       
+        return null;
     }
 }
