@@ -1,6 +1,7 @@
 package castaway;
 
 import castaway.test.splashCanvas;
+import castaway.ui.MainMenu;
 import javax.microedition.lcdui.Display;
 import javax.microedition.midlet.*;
 
@@ -9,22 +10,28 @@ import javax.microedition.midlet.*;
  */
 public class CastawayMIDlet extends MIDlet {
 
-    EventListener listener = new EventListener(this);
     CanvasMap canvases = new CanvasMap();
 
     public void startApp() {
-        canvases.add("SplashScreen", new splashCanvas(listener));
-        canvases.get("SplashScreen").start();
-        Display.getDisplay(this).setCurrent(canvases.get("SplashScreen"));
+        canvases.add(new splashCanvas(new EventListener(this),"splashScreen"));
+        canvases.get("splashScreen").start();
+        canvases.add(new MainMenu(new EventListener(this),"mainMenu"));
+        Display.getDisplay(this).setCurrent(canvases.get("splashScreen"));
     }
 
     public void pauseApp() {
     }
 
     public void destroyApp(boolean unconditional) {
-        listener = null;
         canvases.disposeOfAll();
         canvases = null;
         notifyDestroyed();
+    }
+    
+    public void changeCanvas(String cName){
+        if (canvases.contains(cName)){
+            canvases.get(cName).start();
+            Display.getDisplay(this).setCurrent(canvases.get(cName));
+        }
     }
 }
