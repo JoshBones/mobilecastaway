@@ -8,7 +8,7 @@ _NB._ This is currently all just  me spitballing, trying out a particular way of
 
 = Events =
 
-  # MIDlet defines a global EventListener class.
+  # MIDlet defines an EventListener object for each canvas.
   # A canvas that extends CastawayGameCanvas requires the EventListener to be passed to it's constructor
   # When an event should occur, the canvas calls the doEvent() method with a new Event object, the event type is specified by selecting on the the final static strings from the Event class
   # The EventListener  asynchronously registers the event and the Event's referrer and takes the appropriate action in a new thread.
