@@ -14,7 +14,7 @@ public class EventListener implements Runnable {
     public EventListener(CastawayMIDlet game) {
         this.game = game;
     }
-
+    
     public void doEvent(Event e){
         this.currentEvent = e;
         eventHandlerThread = new Thread(this);

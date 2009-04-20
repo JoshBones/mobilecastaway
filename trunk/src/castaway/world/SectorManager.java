@@ -7,35 +7,29 @@ package castaway.world;
  * @author Andy
  */
 public class SectorManager {
-
+    
     // 3x3 grid of the sectors adjacent to the player
-    private Sector sectorNW;
-    private Sector sectorN;
-    private Sector sectorNE;
-    private Sector sectorW;
-    private Sector sectorMid;
-    private Sector sectorE;
-    private Sector sectorSW;
-    private Sector sectorS;
-    private Sector sectorSE;
+    private Sector sectorNW, sectorN, sectorNE,
+                   sectorW, sectorMid, sectorE,
+                   sectorSW, sectorS, sectorSE;
     
     public int getBoundaryTop()
     {
-        return -1; // TODO
+        return sectorN.getOffsetY();
     }
     
     public int getBoundaryBottom()
     {
-        return -1; // TODO
+        return sectorS.getOffsetY() + Sector.getSize();
     }
     
     public int getBoundaryLeft()
     {
-        return -1; // TODO
+        return sectorW.getOffsetX();
     }
     
     public int getBoundaryRight()
     {
-        return -1; // TODO
+        return sectorE.getOffsetX() + Sector.getSize();
     }
 }
