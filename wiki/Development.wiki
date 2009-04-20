@@ -4,15 +4,19 @@
 
   * Tile Engine
   * General Game Engine
+  * World Generator
 
 = Josh =
 
   * Menus
   * Draw tiles
+  * Isometric Tile Engine
 
 = To Do =
 
-  * DONE - General base GameCanvas class
-  * Isometric Tile Engine
   * Sound / Music
   * Image Manager class
+
+= Done =
+
+  * General base GameCanvas class
