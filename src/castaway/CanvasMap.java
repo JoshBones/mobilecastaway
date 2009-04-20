@@ -12,8 +12,8 @@ public class CanvasMap {
     private Vector canvas = new Vector();
 
     // add new canvas
-    public void add(String canvasName, CastawayGameCanvas canvas){
-        this.canvasName.addElement(canvasName);
+    public void add(CastawayGameCanvas canvas){
+        this.canvasName.addElement(canvas.getName());
         this.canvas.addElement(canvas);
     }
 
@@ -37,6 +37,8 @@ public class CanvasMap {
     
     public void disposeOfAll(){
         for (int i=0;i<canvas.size();i++){
+            ((CastawayGameCanvas) canvas.elementAt(i)).destroy();
+            ((CastawayGameCanvas) canvas.elementAt(i)).killThread();
             canvasName.setElementAt(null, i);
             canvas.setElementAt(null, i);
         }

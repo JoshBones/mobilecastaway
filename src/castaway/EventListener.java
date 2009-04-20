@@ -13,11 +13,11 @@ public class EventListener implements Runnable {
 
     public EventListener(CastawayMIDlet game) {
         this.game = game;
-        eventHandlerThread = new Thread(this);
     }
 
     public void doEvent(Event e){
         this.currentEvent = e;
+        eventHandlerThread = new Thread(this);
         eventHandlerThread.start();
     }
 
@@ -34,7 +34,7 @@ public class EventListener implements Runnable {
             handleGameEvent();
         }
         else if (type.indexOf(Event.EVENT_CONTROL_KEYWORD) == 0){
-            handleGameEvent();
+            handleControlEvent();
         }
         else if (type.indexOf(Event.EVENT_GO_AREA_KEYWORD) == 0){
             //call GO_AREA event handler
@@ -58,6 +58,27 @@ public class EventListener implements Runnable {
         }
         else if (type.equals(Event.EVENT_GAME_EXIT)){
             game.destroyApp(true);
+        }
+    }
+
+    private void handleControlEvent(){
+        String type = currentEvent.getEventType();
+
+        if (type.equals(Event.EVENT_CONTROL_FORWARD)){
+            if (currentEvent.getReferrer().getName().equals("splashScreen")){
+                castaway.test.splashCanvas s = (castaway.test.splashCanvas) currentEvent.getReferrer();
+                s.killThread();
+                game.changeCanvas("mainMenu");
+            }
+        }
+        else if (type.equals(Event.EVENT_CONTROL_START)){
+
+        }
+        else if (type.equals(Event.EVENT_CONTROL_END)){
+
+        }
+        else if (type.equals(Event.EVENT_CONTROL_PAUSE)){
+
         }
     }
 
