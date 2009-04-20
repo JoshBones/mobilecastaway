@@ -16,7 +16,11 @@ public abstract class CastawayGameCanvas extends GameCanvas implements Runnable{
     private int frameDelay=50;//20 fps
     private boolean isRunning=true;// is game loop running?
     private int keyDelay=0;
-    private int keyPressIgnore=4;//how many frames to ignore keypresses for once a keypress is registered
+    private int keyPressIgnore=3;//how many frames to ignore keypresses for once a keypress is registered
+    protected int frame=0;//current frame;
+    private boolean showFrame=false;
+    private boolean drawFrameWhite=false;
+    private boolean enableKeypress=true;
 
     protected Graphics g = getGraphics();
 
@@ -43,16 +47,38 @@ public abstract class CastawayGameCanvas extends GameCanvas implements Runnable{
         while (isRunning){
             loopStartTime = System.currentTimeMillis();
 
+            frame++;            
+
             prePaint();
+
+            g.setClip(0, 0, WIDTH, HEIGHT);
+            if (showFrame){
+                if (drawFrameWhite)
+                    g.setColor(0x00ffffff);
+                else
+                    g.setColor(0x00000000);
+
+                g.drawString(String.valueOf(frame), 5, 5, g.TOP|g.LEFT);
+            }
 
             flushGraphics();
 
-            keyPressed();
+            this.resetGraphics();
+
+            if (keyDelay ==0 && enableKeypress)
+                keyPressed();
+            else{
+                if (keyDelay >0)
+                    keyDelay --;
+            }
 
             postPaint();
 
             try{
-                Thread.sleep((frameDelay - (loopStartTime = System.currentTimeMillis()) >0) ? frameDelay - (loopStartTime = System.currentTimeMillis()) : 0);
+                if (frameDelay - (loopStartTime - System.currentTimeMillis()) < 0)
+                g.drawString("frame delayed!!",15,5,g.TOP|g.LEFT);
+
+                Thread.sleep((frameDelay - (loopStartTime - System.currentTimeMillis()) >0) ? frameDelay - (loopStartTime - System.currentTimeMillis()) : 0);
             }
             catch(Exception e){}
         }
@@ -66,32 +92,28 @@ public abstract class CastawayGameCanvas extends GameCanvas implements Runnable{
         name = null;
     }
 
-    public abstract void prePaint();
+    protected void prePaint(){}
 
-    public abstract void postPaint();
+    protected void postPaint(){}
 
     public void keyPressed(){
-
-        if (keyDelay >0)
-            keyDelay --;
-
-        if ((getKeyStates() & DOWN_PRESSED) !=0 && keyDelay ==0){
+        if ((getKeyStates() & DOWN_PRESSED) !=0){
             downPressed();
             keyDelay = keyPressIgnore;
         }
-        if ((getKeyStates() & UP_PRESSED) !=0 && keyDelay ==0){
+        if ((getKeyStates() & UP_PRESSED) !=0){
             upPressed();
             keyDelay = keyPressIgnore;
         }
-        if ((getKeyStates() & LEFT_PRESSED) !=0 && keyDelay ==0){
+        if ((getKeyStates() & LEFT_PRESSED) !=0){
             leftPressed();
             keyDelay = keyPressIgnore;
         }
-        if ((getKeyStates() & RIGHT_PRESSED) !=0 && keyDelay ==0){
+        if ((getKeyStates() & RIGHT_PRESSED) !=0){
             rightPressed();
             keyDelay = keyPressIgnore;
         }
-        if ((getKeyStates() & FIRE_PRESSED) !=0 && keyDelay ==0){
+        if ((getKeyStates() & FIRE_PRESSED) !=0){
             firePressed();
             keyDelay = keyPressIgnore;
         }
@@ -150,4 +172,23 @@ public abstract class CastawayGameCanvas extends GameCanvas implements Runnable{
         this.isRunning = isRunning;
     }
 
+    public void showFrame(boolean show){
+        this.showFrame=show;
+    }
+
+    public void showFrame(boolean show,String colour){
+        this.showFrame=show;
+        if (colour.equalsIgnoreCase("white")){
+            this.drawFrameWhite=true;
+        }
+    }
+
+    protected void resetGraphics(){
+        g.setClip(0, 0, WIDTH, HEIGHT);
+        g.setColor(0x00ffffff);
+    }
+
+    public void enableKeypresses(boolean enable){
+        this.enableKeypress = enable;
+    }
 }
