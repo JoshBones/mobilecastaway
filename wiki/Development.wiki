@@ -3,6 +3,7 @@
 = Andreas =
 
   * Tile Engine
+  * General Game Engine
 
 = Josh =
 
@@ -11,4 +12,5 @@
 
 = To Do =
 
-  * General base GameCanvas class
+  * DONE - General base GameCanvas class
+  * Isometric Tile Engine
