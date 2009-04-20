@@ -13,6 +13,8 @@ public class splashCanvas extends CastawayGameCanvas{
 
     public splashCanvas(EventListener e,String name) {
         super(e,name);
+
+        showFrame(true,"white");
     }
     
     public void prePaint(){
@@ -20,17 +22,15 @@ public class splashCanvas extends CastawayGameCanvas{
         g.fillRect(0, 0, WIDTH, HEIGHT);
         g.setColor(0x00ffffff);
 
-        String s = "SPLASH!";
+        String s = WIDTH + "px x " + HEIGHT + "px";
         int sWidth = Font.getDefaultFont().stringWidth(s);
         int sHeight = Font.getDefaultFont().getHeight();
-        g.drawString("SPLASH!", HMIDDLE - sWidth/2, VMIDDLE - sHeight/2, g.TOP|g.LEFT);
-       }
+        g.drawString(s, HMIDDLE - sWidth/2, VMIDDLE - sHeight/2, g.TOP|g.LEFT);
+    }
     
-    public void postPaint(){
-        if ((this.getKeyStates() & FIRE_PRESSED) != 0){
-            isRunning(false);
-            this.doEvent(Event.EVENT_CONTROL_FORWARD);
-        }
+    protected void firePressed(){
+        isRunning(false);
+        this.doEvent(Event.EVENT_CONTROL_FORWARD);
     }
     
     public void destroy(){
