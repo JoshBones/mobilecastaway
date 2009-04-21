@@ -1,4 +1,4 @@
-package castaway;
+package castaway.events;
 
 /**
  *

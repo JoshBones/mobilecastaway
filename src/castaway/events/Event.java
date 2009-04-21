@@ -1,4 +1,7 @@
-package castaway;
+package castaway.events;
+
+import castaway.canvas.CastawayGameCanvas;
+import castaway.*;
 
 /**
  *

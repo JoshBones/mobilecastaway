@@ -1,5 +1,8 @@
-package castaway;
+package castaway.canvas;
 
+import castaway.events.Event;
+import castaway.events.InvalidEventTypeException;
+import castaway.events.EventListener;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.game.GameCanvas;
 
