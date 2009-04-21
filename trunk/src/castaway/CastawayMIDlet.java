@@ -1,6 +1,8 @@
 package castaway;
 
-import castaway.test.splashCanvas;
+import castaway.canvas.CanvasMap;
+import castaway.events.EventListener;
+import castaway.ui.splashCanvas;
 import castaway.ui.MainMenu;
 import javax.microedition.lcdui.Display;
 import javax.microedition.midlet.*;

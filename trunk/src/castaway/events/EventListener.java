@@ -1,4 +1,6 @@
-package castaway;
+package castaway.events;
+
+import castaway.*;
 
 /**
  *
@@ -66,7 +68,7 @@ public class EventListener implements Runnable {
 
         if (type.equals(Event.EVENT_CONTROL_FORWARD)){
             if (currentEvent.getReferrer().getName().equals("splashScreen")){
-                castaway.test.splashCanvas s = (castaway.test.splashCanvas) currentEvent.getReferrer();
+                castaway.ui.splashCanvas s = (castaway.ui.splashCanvas) currentEvent.getReferrer();
                 s.killThread();
                 game.changeCanvas("mainMenu");
             }

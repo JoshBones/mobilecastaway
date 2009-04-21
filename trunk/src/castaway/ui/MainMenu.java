@@ -1,8 +1,8 @@
 package castaway.ui;
 
-import castaway.CastawayGameCanvas;
-import castaway.Event;
-import castaway.EventListener;
+import castaway.canvas.CastawayGameCanvas;
+import castaway.events.Event;
+import castaway.events.EventListener;
 import javax.microedition.lcdui.Image;
 
 /**
@@ -17,10 +17,16 @@ import javax.microedition.lcdui.Image;
 public class MainMenu extends CastawayGameCanvas{
 
     private int selectedIndex=0;
+    private int currentMenu=0; //0=main 1=options 2=load
     private Image menu,menuH,wave,sand;
 
     private int waveTop = HEIGHT;
     private boolean paintMenu = false;
+    private boolean paintWave = true;
+
+    private int waveStartFrame=0;
+
+    private String action="";
 
     public MainMenu(EventListener listener, String name) {
         super(listener,name);
@@ -47,17 +53,21 @@ public class MainMenu extends CastawayGameCanvas{
         g.fillRect(0, 0, WIDTH, HEIGHT);
 
         paintSand();
-
         resetGraphics();
 
         if (paintMenu){
             paintMenu();
+            resetGraphics();
         }
 
-        resetGraphics();
-        
-        if (waveTop <= HEIGHT){
+        if (waveTop <= HEIGHT && paintWave){
             paintWave();
+        }
+        else if (waveTop > HEIGHT && paintWave){
+            waveTop = HEIGHT;
+            paintWave=false;
+            if (!action.equals(""))
+                doEvent(action);
         }
     }
 
@@ -76,23 +86,30 @@ public class MainMenu extends CastawayGameCanvas{
     }
 
     protected void firePressed(){
+
+        paintWave = true;
+        waveStartFrame = frame;
+
         switch(selectedIndex){
             case 0:
             case 1:
             case 2:
             case 3:
-                this.doEvent(Event.EVENT_GAME_EXIT);
+                action = Event.EVENT_GAME_EXIT;
         }
     }
 
     private void paintWave(){
-        if (frame <=15){
+        if (frame - waveStartFrame <=15){
             waveTop -= HEIGHT/15;
         }
         else{
-            paintMenu = true;
-            this.enableKeypresses(true);
             waveTop += HEIGHT/15;
+        }
+        
+        if (frame - waveStartFrame == 16){
+            paintMenu = (paintMenu) ? false : true;
+            this.enableKeypresses(true);
         }
 
         g.drawImage(wave, 0, waveTop, g.TOP|g.LEFT);
@@ -104,23 +121,31 @@ public class MainMenu extends CastawayGameCanvas{
 
     private void paintMenu(){
         int topOffset = 90;
-        
-        for (int i=0;i<4;i++){
-            
-            if (i == selectedIndex){
-                try{
-                    g.setClip(HMIDDLE - (menuH.getWidth()/2), topOffset + (i * 30), 156, 25);
-                    g.drawImage(menuH,HMIDDLE - (menuH.getWidth()/2),topOffset + (i * 30) - (i*25), g.TOP|g.LEFT);
+
+        switch (currentMenu){
+            case 0:
+                for (int i=0;i<4;i++){
+                    if (i == selectedIndex){
+                        try{
+                            g.setClip(HMIDDLE - (menuH.getWidth()/2), topOffset + (i * 30), 156, 25);
+                            g.drawImage(menuH,HMIDDLE - (menuH.getWidth()/2),topOffset + (i * 30) - (i*25), g.TOP|g.LEFT);
+                        }
+                        catch(Exception e){}
+                    }
+                    else{
+                        try{
+                            g.setClip(HMIDDLE - (menu.getWidth()/2), topOffset + (i * 30), 156, 25);
+                            g.drawImage(menu,HMIDDLE - (menu.getWidth()/2),topOffset + (i * 30) - (i*25), g.TOP|g.LEFT);
+                        }
+                        catch(Exception e){}
+                    }
                 }
-                catch(Exception e){}
-            }
-            else{
-                try{
-                    g.setClip(HMIDDLE - (menu.getWidth()/2), topOffset + (i * 30), 156, 25);
-                    g.drawImage(menu,HMIDDLE - (menu.getWidth()/2),topOffset + (i * 30) - (i*25), g.TOP|g.LEFT);
-                }
-                catch(Exception e){}
-            }         
+                break;
+            case 1:
+                
+                break;
         }
+        
+        
     }
 }
