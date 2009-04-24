@@ -1,5 +1,6 @@
-package castaway.canvas;
+package castaway.utils;
 
+import castaway.canvas.*;
 import java.util.Vector;
 
 /**

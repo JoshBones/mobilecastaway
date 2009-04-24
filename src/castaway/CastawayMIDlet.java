@@ -1,9 +1,9 @@
 package castaway;
 
-import castaway.canvas.CanvasMap;
+import castaway.utils.CanvasMap;
 import castaway.events.EventListener;
 import castaway.ui.splashCanvas;
-import castaway.ui.MainMenu;
+import castaway.ui.MainMenu2;
 import javax.microedition.lcdui.Display;
 import javax.microedition.midlet.*;
 
@@ -17,7 +17,7 @@ public class CastawayMIDlet extends MIDlet {
     public void startApp() {
         canvases.add(new splashCanvas(new EventListener(this),"splashScreen"));
         canvases.get("splashScreen").start();
-        canvases.add(new MainMenu(new EventListener(this),"mainMenu"));
+        canvases.add(new MainMenu2(new EventListener(this),"mainMenu"));
         Display.getDisplay(this).setCurrent(canvases.get("splashScreen"));
     }
 
