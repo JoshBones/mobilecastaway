@@ -3,8 +3,14 @@ package castaway.utils;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Font;
 /**
+ * This class is used to print an on-screen keyboard 
+ * and return keypresses one at a time.
+ * Termination of the on screen keyboard is up to 
+ * the class that owns the keyboard, but should be done
+ * when the keycode "DONE" is returned.
  *
  * @author Josh
+ * @version 1.0
  */
 public class Keyboard {
 
@@ -14,35 +20,56 @@ public class Keyboard {
     public static final String KEY_RIGHT = "right";
     public static final String KEY_FIRE = "fire";
 
-    private static final String[][] keys = {{"Q","W","E","R","T","Y","U","I","O","P"},{"A","S","D","F","G","H","J","K","L","'"},{"Z","X","C","V","B","N","M",",",".","!"},{"SPACE","DONE"}};
+    /**
+     * specifies the QWERTY keyboard layout.
+     */
+    public static final String[][] LAYOUT_QWERTY = {{"Q","W","E","R","T","Y","U","I","O","P"},{"A","S","D","F","G","H","J","K","L","<<"},{"Z","X","C","V","B","N","M",",",".","!"},{"SPACE","DONE"}};
+    /**
+     * specifies an alphabetic keyboard layout
+     */
+    public static final String[][] LAYOUT_ALPHA = {{"A","B","C","D","E","F","G","H","I","J"},{"K","L","M","N","O","P","Q","R","S","<<"},{"T","U","V","W","X","Y","Z",",",".","!"},{"SPACE","DONE"}};
+    /**
+     * maintains a reference to the currently used leyout
+     */
+    private static String[][] keys = LAYOUT_QWERTY;
 
     private boolean hasFocus = false;
 
+    // row and column of currently focused letter
     private int focusRow,focusColumn;
-    
+
+    // defaults for keyboard colours
+    private int background = 0x00ffffff;
+    private int text = 0x00000000;
+    private int textHighlight = 0x00ff0000;
+
+    /**
+     * paints the keyboard on the lower part of the graphics object passed in
+     */
     public void paint(Graphics g,int width,int height){
         
         Font font = Font.getFont(Font.FACE_MONOSPACE, Font.STYLE_BOLD, Font.SIZE_LARGE);
         int keyboardHeight = (font.getHeight()+4) *keys.length;
         int keyboardTop = height - keyboardHeight;
         
-        g.setColor(0x00ffffff);
-        g.fillRoundRect(5, keyboardTop, width-10, keyboardHeight, 30, 30);
+        g.setColor(background);
+        g.fillRoundRect(5, keyboardTop, width-10, keyboardHeight, 20, 20);
 
         int keyWidth = (width-10) / 10;
         int keyHeight = font.getHeight()+4;
 
         g.setFont(font);
-        
+       
+        //draw letters/symbols
         for (int i=0;i<keys.length-1;i++){
             for (int f=0;f<keys[i].length;f++){
                 int paintx = 5 + (f*keyWidth) + (keyWidth/2) - (font.stringWidth(keys[i][f])/2);
                 int painty = keyboardTop + (i*keyHeight) + (keyHeight/2) - ((font.getHeight()+4)/2);
 
                 if (i == focusRow && f == focusColumn)
-                    g.setColor(0x00ffaa99);
+                    g.setColor(textHighlight);
                 else
-                    g.setColor(0x00000000);
+                    g.setColor(text);
 
                 g.drawString(keys[i][f], paintx, painty, g.TOP|g.LEFT);
             }
@@ -51,32 +78,36 @@ public class Keyboard {
 
         //draw 'space'
         if (keys.length-1 == focusRow && focusColumn <5)
-            g.setColor(0x00ffaa99);
+            g.setColor(textHighlight);
         else
-            g.setColor(0x00000000);
+            g.setColor(text);
         g.drawString(keys[keys.length-1][0], 30, keyboardTop + (keyboardHeight/4)*3, g.TOP|g.LEFT);
 
         //draw 'done'
         if (keys.length-1 == focusRow && focusColumn >=5)
-            g.setColor(0x00ffaa99);
+            g.setColor(textHighlight);
         else
-            g.setColor(0x00000000);
+            g.setColor(text);
         g.drawString(keys[keys.length-1][1], width - 30 - font.stringWidth(keys[keys.length-1][1]), keyboardTop + (keyboardHeight/4)*3, g.TOP|g.LEFT);
-
-
-        for (int i=0;i<keys[keys.length-1].length;i++){
-
-        }
     }
 
+    /**
+     * flag used to give/remove the keyboards input focus
+     */
     public void setFocus(boolean focus){
         this.hasFocus=focus;
     }
 
+    /**
+     * flag that registers that the keyboard currently has input focus
+     */
     public boolean hasFocus(){
         return this.hasFocus;
     }
 
+    /**
+     * fires when the owning class passes a keypress to the keyboard
+     */
     public String gotKeypress(String key){
 
         if (key.equals(KEY_UP)){
@@ -126,4 +157,34 @@ public class Keyboard {
         return "";
     }
 
+    /**
+     * set the background fill colour of the keyboard. refreshes on next paint
+     */
+    public void setBackgroundColour(int background) {
+        this.background = background;
+    }
+
+    /**
+     * sets the colour for the keyboard text. refreshes on next paint
+     */
+    public void setTextColour(int text) {
+        this.text = text;
+    }
+
+    /**
+     * sets the highlight colour used to denote the selected key. refreshes on next paint
+     */
+    public void setTextHighlightColour(int textHighlight) {
+        this.textHighlight = textHighlight;
+    }
+
+    /**
+     * specify either the QWERTY or ALPHA layout
+     */
+    public void setKeyLayout(String[][] layout){
+        if (layout[0][0].equals("A"))
+            keys = LAYOUT_ALPHA;
+        else
+            keys = LAYOUT_QWERTY;
+    }
 }
