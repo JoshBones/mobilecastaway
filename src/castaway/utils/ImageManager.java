@@ -15,9 +15,9 @@ public class ImageManager {
 
     private final int maxImages = 10; //max number of images to hold in memory
     
-    private Vector images = new Vector(maxImages);
-    private Vector imageNames = new Vector(maxImages);
-    private Vector lastUsedRound = new Vector(maxImages);
+    private Vector images = new Vector();
+    private Vector imageNames = new Vector();
+    private Vector lastUsedRound = new Vector();
     
     private int round =0;
 
@@ -30,6 +30,13 @@ public class ImageManager {
      */
     public ImageManager(String resourcePath) {
         this.resourcePath=resourcePath;
+
+        //warm vectors
+        for (int i=0;i<maxImages;i++){
+            images.addElement(null);
+            imageNames.addElement(null);
+            lastUsedRound.addElement(String.valueOf(0));
+        }
     }
 
     /**
@@ -41,7 +48,7 @@ public class ImageManager {
      * @return Image retrieved or null if no such image exists
      * @throws IOException if no such image
      */
-    public Image getImage(String name)throws IOException{
+    public Image getImage(String name){
         round ++;
                 
         if (imageNames.contains(name)){//found image in memory
@@ -61,7 +68,7 @@ public class ImageManager {
             }
             catch (IOException ioe){
                 System.out.println("Error retrieving image " + name + " from " + resourcePath + ". " + ioe.getMessage());
-                throw ioe;//failed to retrieve image
+                return null;
             }
         }
 
@@ -76,14 +83,14 @@ public class ImageManager {
      * @return index of vector to place new image in.
      */
     private int chooseNextIndex(){
-        int chosenIndex = round +1;
+        int chosenIndex=0;
         
         for (int i=0;i<maxImages;i++){
             if (imageNames.elementAt(i)  == null){
                 return i; //found and empty index
             }
             
-            if (((Integer) lastUsedRound.elementAt(i)).intValue() < chosenIndex){
+            if (Integer.parseInt(lastUsedRound.elementAt(i).toString()) < chosenIndex){
                 chosenIndex = i; //marked an index as more suitable for replacement
             }
         }
