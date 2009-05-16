@@ -3,6 +3,8 @@ package castaway.canvas;
 import castaway.events.Event;
 import castaway.events.InvalidEventTypeException;
 import castaway.events.EventListener;
+import castaway.utils.ImageManager;
+
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.game.GameCanvas;
 
@@ -20,6 +22,7 @@ public abstract class CastawayGameCanvas extends GameCanvas implements Runnable{
     private EventListener el;
     private Thread runner;
     private String name;
+    private ImageManager imgMan;
     
     private int frameDelay=50;//20 fps
     private boolean isRunning=true;// is game loop running?
@@ -49,10 +52,11 @@ public abstract class CastawayGameCanvas extends GameCanvas implements Runnable{
      */
     protected final int VMIDDLE;
     
-    public CastawayGameCanvas(EventListener el, String name) {
+    public CastawayGameCanvas(EventListener el, String name,ImageManager imgMan) {
         super(true);
         this.el = el;
         this.name = name;
+        this.imgMan = imgMan;
         this.setFullScreenMode(true);
         HEIGHT = getHeight();
         WIDTH = getWidth();

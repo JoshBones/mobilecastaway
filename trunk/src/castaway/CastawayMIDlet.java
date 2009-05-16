@@ -1,9 +1,13 @@
 package castaway;
 
-import castaway.utils.CanvasMap;
+import castaway.utils.Map;
+import castaway.utils.ImageManager;
 import castaway.events.EventListener;
 import castaway.ui.splashCanvas;
-import castaway.ui.MainMenu2;
+import castaway.ui.mainmenu.MainMenu;
+import castaway.ui.testGrid;
+import castaway.canvas.CastawayGameCanvas;
+
 import javax.microedition.lcdui.Display;
 import javax.microedition.midlet.*;
 
@@ -12,28 +16,40 @@ import javax.microedition.midlet.*;
  */
 public class CastawayMIDlet extends MIDlet {
 
-    CanvasMap canvases = new CanvasMap();
+    private final String SPLASH_SCREEN = "splashScreen";
+    private final String MAIN_MENU = "mainMenu";
+    
+    private Map canvases = new Map();
+    private ImageManager imgMan = new ImageManager("/castaway/resources/");
 
     public void startApp() {
-        canvases.add(new splashCanvas(new EventListener(this),"splashScreen"));
-        canvases.get("splashScreen").start();
-        canvases.add(new MainMenu2(new EventListener(this),"mainMenu"));
-        Display.getDisplay(this).setCurrent(canvases.get("splashScreen"));
+        canvases.add(SPLASH_SCREEN,new splashCanvas(new EventListener(this),SPLASH_SCREEN,imgMan));
+        
+        canvases.add(MAIN_MENU,new MainMenu(new EventListener(this),MAIN_MENU,imgMan));
+        
+        canvases.add("testGrid", new testGrid(new EventListener(this),"testGrid",imgMan));
+        ((testGrid) canvases.get("testGrid")).start();
+        Display.getDisplay(this).setCurrent((testGrid) canvases.get("testGrid"));
     }
 
     public void pauseApp() {
     }
 
     public void destroyApp(boolean unconditional) {
-        canvases.disposeOfAll();
+        try{
+            canvases.disposeOfAll();
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
         canvases = null;
-        notifyDestroyed();
+        notifyDestroyed(); 
     }
     
     public void changeCanvas(String cName){
         if (canvases.contains(cName)){
-            canvases.get(cName).start();
-            Display.getDisplay(this).setCurrent(canvases.get(cName));
+            ((CastawayGameCanvas) canvases.get(cName)).start();
+            Display.getDisplay(this).setCurrent((CastawayGameCanvas)canvases.get(cName));
         }
     }
 }

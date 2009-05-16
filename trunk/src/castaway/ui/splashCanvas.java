@@ -4,11 +4,10 @@ import castaway.canvas.CastawayGameCanvas;
 import castaway.events.Event;
 import castaway.events.EventListener;
 import castaway.utils.Keyboard;
-import java.io.InputStream;
+import castaway.utils.ImageManager;
+
 import javax.microedition.lcdui.Font;
 import javax.microedition.lcdui.Image;
-import javax.microedition.media.Manager;
-import javax.microedition.media.Player;
 
 /**
  *
@@ -22,8 +21,8 @@ public class splashCanvas extends CastawayGameCanvas{
     private Image logo;
 
     private int stage;
-    public splashCanvas(EventListener e,String name) {
-        super(e,name);
+    public splashCanvas(EventListener e,String name,ImageManager imgMan) {
+        super(e,name,imgMan);
 
         showFrame(true,"white");
         k.setKeyLayout(Keyboard.LAYOUT_ALPHA);

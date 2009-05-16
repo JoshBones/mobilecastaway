@@ -31,7 +31,7 @@ public class Keyboard {
     /**
      * maintains a reference to the currently used leyout
      */
-    private static String[][] keys = LAYOUT_QWERTY;
+    private String[][] keys = LAYOUT_QWERTY;
 
     private boolean hasFocus = false;
 
@@ -42,6 +42,23 @@ public class Keyboard {
     private int background = 0x00ffffff;
     private int text = 0x00000000;
     private int textHighlight = 0x00ff0000;
+
+    public Keyboard() {}
+
+    /**
+     * create keyboard with pre-defined attributes
+     *
+     * @param layout specify keyboard layout. either LAYOUT_ALPHA or LAYOUT_QWERTY
+     * @param backgroundColor keyboard background colour
+     * @param textColor keyboard text colour
+     * @param textHighlight keyboard text highlight colour
+     */
+    public Keyboard(String[][] layout,int backgroundColor,int textColor,int textHighlight)throws Exception {
+        this.keys = layout;
+        this.background = backgroundColor;
+        this.text = textColor;
+        this.textHighlight = textHighlight;
+    }
 
     /**
      * paints the keyboard on the lower part of the graphics object passed in
